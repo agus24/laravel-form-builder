@@ -1,0 +1,12 @@
+<?php
+namespace App\Form{namespace};
+
+use Gustiawan\FormBuilder\Form;
+
+class {name} extends Form
+{
+    public function handle() 
+    {
+        //
+    }
+}
