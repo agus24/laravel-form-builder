@@ -1,0 +1,22 @@
+{
+    "name": "gustiawan/laravel-form-builder",
+    "description": "Laravel Form Builder",
+    "keywords": ["laravel", "form", "builder"],
+    "type": "library",
+    "authors": [
+        {
+            "name": "gustiawan",
+            "email": "agusx244@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Gustiawan\\FormBuilder": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
