@@ -35,7 +35,7 @@ class ExampleForm extends Form
 
 then inside your controller
 ```
-$form = new ResetPasswordForm(route('backoffice.reset_password'), "POST");
+$form = new ExampleForm(route('example_routes'), "POST");
 ```
 
 in your view
