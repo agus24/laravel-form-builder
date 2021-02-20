@@ -54,7 +54,7 @@ class Form
     {
         $this->action = $options['action'];
         $this->method = $options['method'];
-        $this->data = array_key_exists("data", $options) ? $options['data'] : null;
+        $this->data = array_key_exists("data", $options) ? $options['data'] : [];
 
         return $this;
     }
