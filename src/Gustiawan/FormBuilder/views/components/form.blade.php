@@ -1,4 +1,7 @@
-<form action="{{ $form->action }}" method="{{ $form->method }}" class="flex justify-center">
+<form action="{{ $form->action }}" 
+    method="{{ $form->method != "GET" ? "POST" : "GET" }}" 
+    class="flex justify-center"
+>
     @if($form->isNeedCsrf())
         @csrf
     @endif
