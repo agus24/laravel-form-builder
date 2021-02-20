@@ -35,7 +35,19 @@ class ExampleForm extends Form
 
 then inside your controller
 ```
-$form = new ExampleForm(route('example_routes'), "POST");
+public function example() 
+{
+    $form = new ExampleForm([
+        "action" => route('example_routes'),
+        "method" => "POST",
+        // optional
+        "data" => [
+            "textinput" => "some text"
+        ]
+    ]);
+
+    return view('example_view', compact('form'));
+}
 ```
 
 in your view

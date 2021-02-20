@@ -7,6 +7,8 @@ class Form
     public $action;
     public $method;
     public $fields = [];
+    public $data = [];
+
     public $button = [
         "label" => "Submit",
         "color" => "bg-blue-400"
@@ -19,11 +21,11 @@ class Form
      * @param  string $method method of form
      * @return Form
      */
-    public function __construct($action, $method) 
+    public function __construct($options = []) 
     {
-        $this->action = $action;
-        // need checker for method list
-        $this->method = $method;
+        $this->action = $options['action'];
+        $this->method = $options['method'];
+        $this->data = $options['data'];
 
         return $this;
     }
@@ -41,13 +43,13 @@ class Form
      * @param  string $type  type
      * @return Form
      */
-    public function text($name, $label, $value="")
+    public function text($name, $label, $value=null)
     {
         $this->fields[] = [
             "label" => $label,
             "type" => "text",
             "name" => $name,
-            "value" => $value
+            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
 
         return $this;
@@ -61,13 +63,13 @@ class Form
      * @param  string $type  type
      * @return Form
      */
-    public function password($name, $label, $value="") 
+    public function password($name, $label, $value=null) 
     {
         $this->fields[] = [
             "label" => $label,
             "type" => "password",
             "name" => $name,
-            "value" => $value
+            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
 
         return $this;
@@ -81,13 +83,13 @@ class Form
      * @param  string $type  type
      * @return Form
      */
-    public function date($name, $label, $value="") 
+    public function date($name, $label, $value=null) 
     {
         $this->fields[] = [
             "label" => $label,
             "type" => "date",
             "name" => $name,
-            "value" => $value
+            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
 
         return $this;
@@ -101,13 +103,13 @@ class Form
      * @param  string $type  type
      * @return Form
      */
-    public function textArea($name, $label, $value="") 
+    public function textArea($name, $label, $value=null) 
     {
         $this->fields[] = [
             "label" => $label,
             "type" => "textarea",
             "name" => $name,
-            "value" => $value
+            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
 
         return $this;
@@ -121,26 +123,26 @@ class Form
      * @param  string $type  type
      * @return Form
      */
-    public function select($name, $label, $choices, $value="")
+    public function select($name, $label, $choices, $value=null)
     {
         $this->fields[] = [
             "label" => $label,
             "type" => "select",
             "name" => $name,
-            "value" => $value,
+            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null),
             "choices" => $choices
         ];
 
         return $this;
     }
 
-    public function radio($name, $label, $choices, $value="")
+    public function radio($name, $label, $choices, $value=null)
     {
         $this->fields[] = [
             "label" => $label,
             "type" => "radio",
             "name" => $name,
-            "value" => $value,
+            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null),
             "choices" => $choices
         ];
 
@@ -153,7 +155,7 @@ class Form
             "label" => $label,
             "type" => "checkbox",
             "name" => $name,
-            "value" => $value,
+            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : []),
             "choices" => $choices
         ];
 
