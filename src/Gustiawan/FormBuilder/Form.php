@@ -1,27 +1,56 @@
 <?php
-
 namespace Gustiawan\FormBuilder;
 
+/**
+ * Base Form Class
+ */
 class Form
 {
+
+    /**
+     * Action for form
+     *
+     * @var string
+     */
     public $action;
+
+    /**
+     * Method For form.
+     *
+     * @var string
+     */
     public $method;
+
+    /**
+     * Form Field List
+     *
+     * @var array
+     */
     public $fields = [];
+
+    /**
+     * Form Default value
+     *
+     * @var array
+     */
     public $data = [];
 
+    /**
+     * Button Variable
+     *
+     * @var array
+     */
     public $button = [
         "label" => "Submit",
         "color" => "bg-blue-400"
     ];
 
     /**
-     * Create Form
+     * Construct the form head with given options
      *
-     * @param  string $action action of form
-     * @param  string $method method of form
-     * @return Form
+     * @param array $options
      */
-    public function __construct($options = []) 
+    public function __construct(array $options = []) 
     {
         $this->action = $options['action'];
         $this->method = $options['method'];
@@ -30,20 +59,25 @@ class Form
         return $this;
     }
 
+    /**
+     * Handle form builder
+     *
+     * @return void
+     */
     public function handle() 
     {
         // 
     }
 
     /**
-     * Create Input Field
+     * Form Text input
      *
-     * @param  string $name  name
-     * @param  any    $value value
-     * @param  string $type  type
-     * @return Form
+     * @param string $name
+     * @param string $label
+     * @param mixed $value
+     * @return void
      */
-    public function text($name, $label, $value=null)
+    public function text(string $name, string $label, mixed $value=null)
     {
         $this->fields[] = [
             "label" => $label,
@@ -51,19 +85,17 @@ class Form
             "name" => $name,
             "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
-
-        return $this;
     }
 
     /**
-     * Create Password Field
+     * Form Password Input
      *
-     * @param  string $name  name
-     * @param  any    $value value
-     * @param  string $type  type
-     * @return Form
+     * @param string $name
+     * @param string $label
+     * @param mixed $value
+     * @return void
      */
-    public function password($name, $label, $value=null) 
+    public function password(string $name, string $label, mixed $value=null) 
     {
         $this->fields[] = [
             "label" => $label,
@@ -71,19 +103,17 @@ class Form
             "name" => $name,
             "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
-
-        return $this;
     }
 
     /**
-     * Create Password Field
+     * Form Date Input
      *
-     * @param  string $name  name
-     * @param  any    $value value
-     * @param  string $type  type
-     * @return Form
+     * @param string $name
+     * @param string $label
+     * @param mixed $value
+     * @return void
      */
-    public function date($name, $label, $value=null) 
+    public function date(string $name, string $label, mixed $value=null) 
     {
         $this->fields[] = [
             "label" => $label,
@@ -91,19 +121,17 @@ class Form
             "name" => $name,
             "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
-
-        return $this;
     }
 
     /**
-     * Create Password Field
+     * Form Text Area Input
      *
-     * @param  string $name  name
-     * @param  any    $value value
-     * @param  string $type  type
-     * @return Form
+     * @param string $name
+     * @param string $label
+     * @param mixed $value
+     * @return void
      */
-    public function textArea($name, $label, $value=null) 
+    public function textArea(string $name, string $label, mixed $value=null) 
     {
         $this->fields[] = [
             "label" => $label,
@@ -111,19 +139,18 @@ class Form
             "name" => $name,
             "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
         ];
-
-        return $this;
     }
 
     /**
-     * Create Password Field
+     * Form Select Box Input
      *
-     * @param  string $name  name
-     * @param  any    $value value
-     * @param  string $type  type
-     * @return Form
+     * @param string $name
+     * @param string $label
+     * @param array $choices
+     * @param mixed $value
+     * @return void
      */
-    public function select($name, $label, $choices, $value=null)
+    public function select(string $name, string $label, array $choices, mixed $value=null)
     {
         $this->fields[] = [
             "label" => $label,
@@ -132,11 +159,18 @@ class Form
             "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null),
             "choices" => $choices
         ];
-
-        return $this;
     }
 
-    public function radio($name, $label, $choices, $value=null)
+    /**
+     * Form Radio Input
+     *
+     * @param string $name
+     * @param string $label
+     * @param array $choices
+     * @param mixed $value
+     * @return void
+     */
+    public function radio(string $name, string $label, array $choices, mixed $value=null)
     {
         $this->fields[] = [
             "label" => $label,
@@ -149,7 +183,16 @@ class Form
         return $this;
     }
 
-    public function checkBox($name, $label, $choices, array $value=[])
+    /**
+     * Form Checkbox Input
+     *
+     * @param string $name
+     * @param string $label
+     * @param array $choices
+     * @param array $value
+     * @return void
+     */
+    public function checkBox(string $name, string $label, array $choices, array $value=[])
     {
         $this->fields[] = [
             "label" => $label,
@@ -162,7 +205,14 @@ class Form
         return $this;
     }
 
-    public function button($label="Submit", $color="bg-blue-500") 
+    /**
+     * Customizing Form Button
+     *
+     * @param string $label
+     * @param string $color
+     * @return void
+     */
+    public function button(string $label="Submit", string $color="bg-blue-500") 
     {
         $this->button["label"] = $label;
         $this->button["color"] = $color;
