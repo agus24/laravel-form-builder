@@ -42,7 +42,7 @@ class Form
      */
     public $button = [
         "label" => "Submit",
-        "color" => "bg-blue-400"
+        "color" => null
     ];
 
     /**
@@ -56,6 +56,8 @@ class Form
         $this->method = $options['method'];
         $this->data = array_key_exists("data", $options) ? $options['data'] : [];
 
+        $this->button['color'] = config('form_generator.style') == "tailwind" ? "bg-blue-400" : "btn-primary";
+
         return $this;
     }
 
@@ -64,7 +66,7 @@ class Form
      *
      * @return void
      */
-    public function handle() 
+    protected function handle() 
     {
         // 
     }
@@ -74,17 +76,12 @@ class Form
      *
      * @param string $name
      * @param string $label
-     * @param mixed $value
+     * @param array $options
      * @return void
      */
-    public function text(string $name, string $label, mixed $value=null)
+    protected function text(string $name, string $label, array $options=[])
     {
-        $this->fields[] = [
-            "label" => $label,
-            "type" => "text",
-            "name" => $name,
-            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
-        ];
+        $this->fields[] = $this->parseField("text", $name, $label, $options);
     }
 
     /**
@@ -92,17 +89,12 @@ class Form
      *
      * @param string $name
      * @param string $label
-     * @param mixed $value
+     * @param array $options
      * @return void
      */
-    public function password(string $name, string $label, mixed $value=null) 
+    public function password(string $name, string $label, array $options=[]) 
     {
-        $this->fields[] = [
-            "label" => $label,
-            "type" => "password",
-            "name" => $name,
-            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
-        ];
+        $this->fields[] = $this->parseField("password", $name, $label, $options);
     }
 
     /**
@@ -110,17 +102,12 @@ class Form
      *
      * @param string $name
      * @param string $label
-     * @param mixed $value
+     * @param array $options
      * @return void
      */
-    public function date(string $name, string $label, mixed $value=null) 
+    public function date(string $name, string $label, array $options=[]) 
     {
-        $this->fields[] = [
-            "label" => $label,
-            "type" => "date",
-            "name" => $name,
-            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
-        ];
+        $this->fields[] = $this->parseField("date", $name, $label, $options);
     }
 
     /**
@@ -128,17 +115,12 @@ class Form
      *
      * @param string $name
      * @param string $label
-     * @param mixed $value
+     * @param array $options
      * @return void
      */
-    public function textArea(string $name, string $label, mixed $value=null) 
+    public function textArea(string $name, string $label, array $options=[]) 
     {
-        $this->fields[] = [
-            "label" => $label,
-            "type" => "textarea",
-            "name" => $name,
-            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null)
-        ];
+        $this->fields[] = $this->parseField("textarea", $name, $label, $options);
     }
 
     /**
@@ -147,18 +129,14 @@ class Form
      * @param string $name
      * @param string $label
      * @param array $choices
-     * @param mixed $value
+     * @param array $options
      * @return void
      */
-    public function select(string $name, string $label, array $choices, mixed $value=null)
+    public function select(string $name, string $label, array $choices, array $options=[])
     {
-        $this->fields[] = [
-            "label" => $label,
-            "type" => "select",
-            "name" => $name,
-            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null),
-            "choices" => $choices
-        ];
+        $field = $this->parseField("select", $name, $label, $options);
+        $field['choices'] = $choices;
+        $this->fields[] = $field;
     }
 
     /**
@@ -167,20 +145,14 @@ class Form
      * @param string $name
      * @param string $label
      * @param array $choices
-     * @param mixed $value
+     * @param array $options
      * @return void
      */
-    public function radio(string $name, string $label, array $choices, mixed $value=null)
+    public function radio(string $name, string $label, array $choices, array $options=[])
     {
-        $this->fields[] = [
-            "label" => $label,
-            "type" => "radio",
-            "name" => $name,
-            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : null),
-            "choices" => $choices
-        ];
-
-        return $this;
+        $field = $this->parseField("radio", $name, $label, $options);
+        $field['choices'] = $choices;
+        $this->fields[] = $field;
     }
 
     /**
@@ -189,20 +161,14 @@ class Form
      * @param string $name
      * @param string $label
      * @param array $choices
-     * @param array $value
+     * @param array $option
      * @return void
      */
-    public function checkBox(string $name, string $label, array $choices, array $value=[])
+    public function checkBox(string $name, string $label, array $choices, array $options=[])
     {
-        $this->fields[] = [
-            "label" => $label,
-            "type" => "checkbox",
-            "name" => $name,
-            "value" => $value ?? (array_key_exists($name, $this->data) ? $this->data[$name] : []),
-            "choices" => $choices
-        ];
-
-        return $this;
+        $field = $this->parseField("checkbox", $name, $label, $options, []);
+        $field['choices'] = $choices;
+        $this->fields[] = $field;
     }
 
     /**
@@ -230,5 +196,33 @@ class Form
         }
         
         return true;
+    }
+
+    /**
+     * Parse Field Array
+     *
+     * @param string $type
+     * @param string $name
+     * @param string $label
+     * @param array $options
+     * @param mixed $default_value
+     * @return void
+     */
+    private function parseField(string $type, string $name, string $label, array $options, $default_value=null)
+    {
+        $field = [
+            "label" => $label,
+            "type" => $type,
+            "name" => $name,
+            "required" => array_key_exists("required", $options) ? $options['required'] : false,
+        ];
+
+        if (array_key_exists("value", $options)) {
+            $field['value'] = $options['value'];
+        } else {
+            $field['value'] = (array_key_exists($name, $this->data) ? $this->data[$name] : $default_value);
+        }
+
+        return $field;
     }
 }
