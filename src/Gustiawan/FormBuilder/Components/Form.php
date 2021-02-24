@@ -25,6 +25,15 @@ class Form extends Component
      */
     public function render()
     {
-        return view('form-generator::components.form');
+        $view = view('form-generator::components.tailwind.base');
+        if (config('form_generator.style') == "bootstrap") {
+            $view = view('form-generator::components.bootstrap.base');
+        }
+
+        if (config('form_generator.form_template') != null) {
+            return view(config('form_generator.form_template'));
+        }
+
+        return $view;
     }
 }
