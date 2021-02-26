@@ -3,7 +3,7 @@
         <div>
             <label class="inline-flex items-center">
                 <input type="checkbox" 
-                        class="form-checkbox bg-gray-200" 
+                        class="form-checkbox bg-gray-200 {{ $field['class'] }}" 
                         name="{{ $field['name'] }}[]"
                         value="{{ $value }}"
                         {{ in_array($value, (old($field['name']) ?? $field['value'])) ? "checked" : "" }}>

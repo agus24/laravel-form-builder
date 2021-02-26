@@ -1,4 +1,4 @@
-<input class="form-control" 
+<input class="form-control {{ $field['class'] }}" 
     id="{{ $field['name'] }}" 
     type="{{ $field['type'] }}" 
     name="{{ $field['name'] }}" 

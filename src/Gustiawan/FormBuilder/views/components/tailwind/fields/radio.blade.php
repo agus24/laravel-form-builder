@@ -3,7 +3,7 @@
     <div>
         <label class="inline-flex items-center">
             <input type="radio" 
-                    class="form-radio bg-gray-200" 
+                    class="form-radio bg-gray-200 {{ $field['class'] }}" 
                     name="{{ $field['name'] }}"
                     value="{{ $value }}" 
                     {{ (old($field['name']) ?? $field['value']) == $value ? "checked" : "" }}
