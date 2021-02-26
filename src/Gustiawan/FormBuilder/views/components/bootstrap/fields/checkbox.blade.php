@@ -1,7 +1,7 @@
 @foreach($field['choices'] as $value => $choice)
     <div class="form-check">
         <input type="checkbox" 
-            class="form-check-input" 
+            class="form-check-input {{ $field['class'] }}" 
             name="{{ $field['name'] }}[]"
             id="{{ $field['name']."-{$value}" }}"
             value="{{ $value }}"

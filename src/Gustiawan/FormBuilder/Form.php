@@ -111,6 +111,19 @@ class Form
     }
 
     /**
+     * Form Date Input
+     *
+     * @param string $name
+     * @param string $label
+     * @param array $options
+     * @return void
+     */
+    public function number(string $name, string $label, array $options=[]) 
+    {
+        $this->fields[] = $this->parseField("number", $name, $label, $options);
+    }
+
+    /**
      * Form Text Area Input
      *
      * @param string $name
@@ -215,6 +228,7 @@ class Form
             "type" => $type,
             "name" => $name,
             "required" => array_key_exists("required", $options) ? $options['required'] : false,
+            "class" => array_key_exists("class", $options) ? $options['class'] : "",
         ];
 
         if (array_key_exists("value", $options)) {
