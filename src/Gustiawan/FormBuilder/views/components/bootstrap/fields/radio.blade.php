@@ -6,7 +6,9 @@
             value="{{ $value }}" 
             id="{{ $field['name']."-{$value}" }}"
             {{ (old($field['name']) ?? $field['value']) == $value ? "checked" : "" }}
-            {{ $field['required'] ? "required" : "" }}>
+            {{ $field['required'] ? "required" : "" }}
+            {{ $field['readonly'] ? "readonly" : "" }}
+            {{ $field['disabled'] ? "disabled" : "" }}>
         <label class="form-check-label" for="{{ $field['name']."-{$value}" }}">{{ $choice }}</label>
     </div>
 @endforeach

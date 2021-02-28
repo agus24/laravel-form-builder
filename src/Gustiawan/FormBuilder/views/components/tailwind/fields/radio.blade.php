@@ -7,7 +7,9 @@
                     name="{{ $field['name'] }}"
                     value="{{ $value }}" 
                     {{ (old($field['name']) ?? $field['value']) == $value ? "checked" : "" }}
-                    {{ $field['required'] ? "required" : "" }}>
+                    {{ $field['required'] ? "required" : "" }}
+                    {{ $field['readonly'] ? "readonly" : "" }}
+                    {{ $field['disabled'] ? "disabled" : "" }}>
             <span class="ml-2">{{ $choice }}</span>
         </label>
     </div>

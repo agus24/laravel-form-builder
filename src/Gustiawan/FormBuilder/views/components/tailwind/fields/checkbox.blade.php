@@ -6,6 +6,8 @@
                         class="form-checkbox bg-gray-200 {{ $field['class'] }}" 
                         name="{{ $field['name'] }}[]"
                         value="{{ $value }}"
+                        {{ $field['readonly'] ? "readonly" : "" }}
+                        {{ $field['disabled'] ? "disabled" : "" }}
                         {{ in_array($value, (old($field['name']) ?? $field['value'])) ? "checked" : "" }}>
                 <span class="ml-2">{{ $choice }}</span>
             </label>

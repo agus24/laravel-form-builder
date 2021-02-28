@@ -228,6 +228,8 @@ class Form
             "type" => $type,
             "name" => $name,
             "required" => array_key_exists("required", $options) ? $options['required'] : false,
+            "readonly" => array_key_exists("readonly", $options) ? $options['readonly'] : false,
+            "disabled" => array_key_exists("disabled", $options) ? $options['disabled'] : false,
             "class" => array_key_exists("class", $options) ? $options['class'] : "",
         ];
 
