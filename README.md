@@ -5,7 +5,7 @@ must use `tailwindcss` and `tailwindcss/custom-forms` please install it using yo
 
 ## Installation
 
-```gustiawan/laravel-form-builder```
+```composer require gustiawan/laravel-form-builder```
 
 ## Usage
 create form using
