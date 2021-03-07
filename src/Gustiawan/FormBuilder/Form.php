@@ -233,11 +233,10 @@ class Form
             "class" => array_key_exists("class", $options) ? $options['class'] : "",
         ];
 
-        if (array_key_exists("value", $options)) {
-            $field['value'] = $options['value'];
-        }
+        $data = (array_key_exists($name, $this->data) ? $this->data[$name] : $default_value);
+        $value = array_key_exists("value", $options) ? $options['value'] : null;
 
-        $field['value'] = (array_key_exists($name, $this->data) ? $this->data[$name] : $default_value);
+        $field['value'] = $data ?? $value;
 
         return $field;
     }
