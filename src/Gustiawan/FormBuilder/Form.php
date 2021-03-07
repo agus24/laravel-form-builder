@@ -235,9 +235,9 @@ class Form
 
         if (array_key_exists("value", $options)) {
             $field['value'] = $options['value'];
-        } else {
-            $field['value'] = (array_key_exists($name, $this->data) ? $this->data[$name] : $default_value);
         }
+
+        $field['value'] = (array_key_exists($name, $this->data) ? $this->data[$name] : $default_value);
 
         return $field;
     }
