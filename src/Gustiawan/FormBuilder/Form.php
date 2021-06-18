@@ -45,6 +45,8 @@ class Form
         "color" => null
     ];
 
+    public $extra = null;
+
     /**
      * Construct the form head with given options
      *
@@ -55,6 +57,7 @@ class Form
         $this->action = $options['action'];
         $this->method = $options['method'];
         $this->data = array_key_exists("data", $options) ? $options['data'] : [];
+        $this->extra = array_key_exists("extra", $options) ? $options['extra'] : [];
 
         $this->button['color'] = config('form_generator.style') == "tailwind" ? "bg-blue-400" : "btn-primary";
 
