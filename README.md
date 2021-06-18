@@ -7,7 +7,7 @@
 
 run this command to publish package
 
-`php artisan vendor:publish --provider=Gustiawan\FormBuilder\FormBuilderServiceProvider`
+`php artisan vendor:publish --provider="Gustiawan\FormBuilder\FormBuilderServiceProvider"`
 
 ## configuration
 change style to bootstrap if you want to use bootstrap styling
