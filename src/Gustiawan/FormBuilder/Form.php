@@ -36,6 +36,13 @@ class Form
     public $data = [];
 
     /**
+     * Form Has Upload Field
+     *
+     * @var boolean
+     */
+    public $hasUpload = false;
+
+    /**
      * Button Variable
      *
      * @var array
@@ -184,6 +191,21 @@ class Form
     {
         $field = $this->parseField("checkbox", $name, $label, $options, []);
         $field['choices'] = $choices;
+        $this->fields[] = $field;
+    }
+
+    /**
+     * Form Upload Field
+     *
+     * @param string $name
+     * @param string $label
+     * @param array $options
+     * @return void
+     */
+    public function upload(string $name, string $label, array $options=[]) 
+    {
+        $field = $this->parseField('upload', $name, $label, $options);
+        $this->hasUpload = true;
         $this->fields[] = $field;
     }
 
