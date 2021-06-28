@@ -204,7 +204,7 @@ class Form
      */
     public function upload(string $name, string $label, array $options=[]) 
     {
-        $field = $this->parseField('upload', $name, $label, $options);
+        $field = $this->parseField('file', $name, $label, $options);
         $this->hasUpload = true;
         $this->fields[] = $field;
     }
