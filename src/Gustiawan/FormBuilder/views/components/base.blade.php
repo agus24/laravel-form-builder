@@ -1,6 +1,9 @@
 <form action="{{ $form->action }}" 
     method="{{ $form->method != "GET" ? "POST" : "GET" }}" 
     class="flex justify-center"
+    @if ($form->hasUpload)
+        enctype="multipart/form-data"
+    @endif
 >
     @if($form->isNeedCsrf())
         @csrf
