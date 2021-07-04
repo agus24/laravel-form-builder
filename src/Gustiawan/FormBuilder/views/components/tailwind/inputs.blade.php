@@ -1,5 +1,15 @@
 <div class="w-full">
     @foreach($form->fields as $field)
+        @if ($field['type'] == 'separator')
+            <div class="mb-4 my-3">
+                @if ($field['label'] != '')
+                    <label class="ml-1">{!! $field['label'] !!}</label>
+                @endif
+                <hr />
+            </div>
+            @continue
+        @endif
+
         <div class="mb-4">
             <label class="ml-1">{!! $field['label'] !!}</label>
             @if( !in_array($field['type'], ["text", "date", "password", "number", "file"]))
