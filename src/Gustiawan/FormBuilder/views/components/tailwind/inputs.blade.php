@@ -3,7 +3,7 @@
         @if ($field['type'] == 'separator')
             <div class="mb-4 my-3">
                 @if ($field['label'] != '')
-                    <label class="ml-1">{!! $field['label'] !!}</label>
+                    <h1 class="text-lg ml-1">{!! $field['label'] !!}</h1>
                 @endif
                 <hr />
             </div>

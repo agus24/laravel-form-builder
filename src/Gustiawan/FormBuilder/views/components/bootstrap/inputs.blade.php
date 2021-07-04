@@ -2,7 +2,7 @@
     @if ($field['type'] == 'separator')
         <div class="form-group" style="margin-top: 3em; margin-bottom: 2em;">
             @if ($field['label'] != '')
-                <label class="font-weight-bold">{{ $field['label'] }}</label>
+                <h1 class="font-weight-bold">{{ $field['label'] }}</h1>
             @endif
             <hr />
         </div>
