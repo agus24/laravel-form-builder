@@ -223,6 +223,17 @@ class Form
     }
 
     /**
+     * Add Separator to form
+     *
+     * @param string $label
+     * @return void
+     */
+    public function separator(string $label='') 
+    {
+        $this->fields[] = $this->parseField('separator', 'separator', $label, []);
+    }
+
+    /**
      * check if form need csrf
      *
      * @return boolean

@@ -12,7 +12,7 @@
     @if($form->method != "POST" && $form->method != "GET")
         @method($form->method)
     @endif
-    @include('form-generator::components.' .config('form_generator.style'). '.inputs', ["form" => $form])
+    @include('form-generator::components.' . config('form_generator.style') . '.inputs', ["form" => $form])
 
     {{ $slot }}
 </form>
