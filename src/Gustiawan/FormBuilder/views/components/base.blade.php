@@ -21,7 +21,7 @@
     function loadDataFor(element, field, url) {
         url = url.replaceAll(`{${field}}`, element.value)
         field = document.querySelector(`#${field}`)
-        fetch(url).then(response => fetchField(field, response)).catch(error => alert(error))
+        fetch(url).then(response => fetchField(field, response.json())).catch(error => alert(error))
     }
 
     function fetchField(field, values) {
