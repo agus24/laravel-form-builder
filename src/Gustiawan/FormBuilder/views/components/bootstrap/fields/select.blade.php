@@ -3,6 +3,9 @@
     {{ $field['required'] ? "required" : "" }}
     {{ $field['readonly'] ? "readonly" : "" }}
     {{ $field['disabled'] ? "disabled" : "" }}
+    @if ($field['load'])
+        onchange="loadDataFor(this, '{{ $field['load']['field'] }}', '{{ $field['load']['url'] }}')"
+    @endif
 >
     <option value="">Select</option>
     @foreach($field['choices'] as $value => $choice)

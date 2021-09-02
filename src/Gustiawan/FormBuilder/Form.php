@@ -267,6 +267,12 @@ class Form
             "readonly" => array_key_exists("readonly", $options) ? $options['readonly'] : false,
             "disabled" => array_key_exists("disabled", $options) ? $options['disabled'] : false,
             "class" => array_key_exists("class", $options) ? $options['class'] : "",
+            "load" => array_key_exists("load", $options) 
+                ? [
+                    'url' => $options['load']['url'],
+                    'field' => $options['load']['field']
+                ]
+                : null
         ];
 
         $data = (array_key_exists($name, $this->data) ? $this->data[$name] : $default_value);
