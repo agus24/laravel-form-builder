@@ -31,15 +31,17 @@
         option.innerText = "Select"
         let options = [option]
 
-        for (const value in values) {
-            let option = document.createElement('option')
-            option.value = value
-            option.innerText = values[value]
-            options.push(option)
-        }
+        values.then(data => {
+            for (const value in data) {
+                let option = document.createElement('option')
+                option.value = value
+                option.innerText = values[value]
+                options.push(option)
+            }
 
-        for (let i = 0; i < options.length; i++) {
-            field.appendChild(options[i])
-        }
+            for (let i = 0; i < options.length; i++) {
+                field.appendChild(options[i])
+            }
+        })
     }
 </script>
