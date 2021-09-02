@@ -30,14 +30,13 @@
             field.innerText = ''
             let options = []
             for (const value in data) {
-                let newOption = document.createElement('option')
-                newOption.value = value
-                newOption.innerText = data[value]
-                options.push(newOption)
+                let option = document.createElement('option')
+                option.value = value
+                option.innerText = data[value]
+                options.push(option)
             }
 
             let option = document.createElement('option')
-            option.value = ""
             option.innerText = "Select"
             options.unshift(option)
 
