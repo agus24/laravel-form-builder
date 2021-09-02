@@ -19,7 +19,7 @@
 
 <script>
     function loadDataFor(element, field, url) {
-        url = url.replaceAll(`{{ ${field} }}`, element.value)
+        url = url.replaceAll(`{${field}}`, element.value)
         fetch(url).then(response => fetchField(field, values)).catch(error => alert(error))
     }
 
