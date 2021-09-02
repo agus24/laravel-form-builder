@@ -20,7 +20,7 @@
 <script>
     function loadDataFor(element, field, url) {
         url = url.replaceAll(`{${field}}`, element.value)
-        field = document.querySelector(field)
+        field = document.querySelector(`#${field}`)
         fetch(url).then(response => fetchField(field, response)).catch(error => alert(error))
     }
 
