@@ -26,18 +26,20 @@
 
     function fetchField(field, values) {
         field.children.forEach(el => el.remove())
-        let option = document.createElement('option')
-        option.value = ""
-        option.innerText = "Select"
-        let options = [option]
-
         values.then(data => {
+            field.innerText = ''
+            let options = []
             for (const value in data) {
-                let option = document.createElement('option')
-                option.value = value
-                option.innerText = values[value]
-                options.push(option)
+                let newOption = document.createElement('option')
+                newOption.value = value
+                newOption.innerText = data[value]
+                options.push(newOption)
             }
+
+            let option = document.createElement('option')
+            option.value = ""
+            option.innerText = "Select"
+            options.unshift(option)
 
             for (let i = 0; i < options.length; i++) {
                 field.appendChild(options[i])
