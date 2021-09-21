@@ -1,5 +1,5 @@
-<form action="{{ $form->action }}" 
-    method="{{ $form->method != "GET" ? "POST" : "GET" }}" 
+<form action="{{ $form->action }}"
+    method="{{ $form->method != "GET" ? "POST" : "GET" }}"
     class="flex justify-center"
     @if ($form->hasUpload)
         enctype="multipart/form-data"
@@ -25,7 +25,9 @@
     }
 
     function fetchField(field, values) {
-        field.children.forEach(el => el.remove())
+        for (let i = 0 ; i < field.children.length ; i++) {
+            field.children[i].remove();
+        }
         values.then(data => {
             field.innerText = ''
             let options = []
