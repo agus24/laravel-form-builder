@@ -121,6 +121,20 @@ class Form
     }
 
     /**
+     * Form Custom Input
+     *
+     * @param string $name
+     * @param string $label'
+     * * @param string $type
+     * @param array $options
+     * @return void
+     */
+    public function input(string $name, string $label, string $type, array $options=[]) 
+    {
+        $this->fields[] = $this->parseField($type, $name, $label, $options);
+    }
+
+    /**
      * Form Date Input
      *
      * @param string $name
