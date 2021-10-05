@@ -12,7 +12,7 @@
 
         <div class="mb-4">
             <label class="ml-1">{!! $field['label'] !!}</label>
-            @if( !in_array($field['type'], ["text", "date", "password", "number", "file", "time", "datetime"]))
+            @if( !in_array($field['type'], ["text", "date", "password", "number", "file", "time", "datetime", 'hidden']))
                 @include('form-generator::components.tailwind.fields.'.$field['type'], ["field" => $field])
             @else
                 @include('form-generator::components.tailwind.fields.input', ["field" => $field])
