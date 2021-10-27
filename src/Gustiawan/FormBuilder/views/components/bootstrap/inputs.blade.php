@@ -9,7 +9,7 @@
         @continue
     @endif
     <div class="form-group">
-        <label for="{{ $field['name'] }}" class="font-weight-bold">{!! $field['label'] !!}</label>
+        <label for="{{ $field['name'] }}" class="font-weight-bold {{ $field['required'] ? 'text-danger' : '' }}">{!! $field['label'] !!}</label>
         @if (in_array($field['type'], ["text", "date", "password", "number", "file", "datetime", "time", 'hidden']))
             @include('form-generator::components.bootstrap.fields.input', ["field" => $field])
         @else

@@ -11,7 +11,7 @@
         @endif
 
         <div class="mb-4">
-            <label class="ml-1">{!! $field['label'] !!}</label>
+            <label class="ml-1 {{ $field['required'] ? 'text-red-500' : '' }}">{!! $field['label'] !!}</label>
             @if( !in_array($field['type'], ["text", "date", "password", "number", "file", "time", "datetime", 'hidden']))
                 @include('form-generator::components.tailwind.fields.'.$field['type'], ["field" => $field])
             @else
